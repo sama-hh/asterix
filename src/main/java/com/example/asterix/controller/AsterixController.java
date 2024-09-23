@@ -13,10 +13,19 @@ import java.util.List;
 public class AsterixController {
     private final CharacterRepository characterRepository;
 
+//    @GetMapping("/characters")
+//    public List<Character> findAll() {
+//        List<Character> people = characterRepository.findAll();
+//        return people;
+//    }
+
     @GetMapping("/characters")
-    public List<Character> findAll() {
-        List<Character> people = characterRepository.findAll();
-        return people;
+    public List<Character> findAll(@RequestParam("name") String name) {
+        if (name == null) {
+            return characterRepository.findAll();
+        }
+        List<Character> peopleByName = characterRepository.findByName(name);
+        return peopleByName;
     }
 
     @PostMapping("characters")
