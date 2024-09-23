@@ -1,5 +1,6 @@
 package com.example.asterix.service;
 
+import com.example.asterix.dto.UpdateCharacterRequest;
 import com.example.asterix.repository.CharacterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,19 @@ public class CharacterService {
 
     public List<Character> getAllCharacters(Integer age) {
         List<Character> filteredCharacters = characterRepository.findByAgeLessThanEqual(age);
-
         return filteredCharacters;
+    }
+
+    public Character updateCharacter(String id, UpdateCharacterRequest request) {
+        Character existingCharacter = characterRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Character not found"));
+
+        Character updatedCharacter = new Character(existingCharacter.id(),
+                request.name(),
+                request.age(),
+                request.profession());
+
+        return characterRepository.save(updatedCharacter);
     }
 
 

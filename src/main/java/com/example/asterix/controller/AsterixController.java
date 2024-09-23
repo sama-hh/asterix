@@ -1,6 +1,7 @@
 package com.example.asterix.controller;
 
 import com.example.asterix.dto.CreatePersonRequest;
+import com.example.asterix.dto.UpdateCharacterRequest;
 import com.example.asterix.service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -43,14 +44,19 @@ public class AsterixController {
         characterRepository.deleteById(id);
     }
 
+//    @PutMapping("characters/{id}")
+//    public Character update(@PathVariable String id, @RequestBody Character character) {
+//        Character existingCharacter = characterRepository.findById(id)
+//                .orElse(null);
+//        characterRepository.deleteById(id);
+//        Character newCharacter = character.withId(id);
+//        characterRepository.save(newCharacter);
+//        return newCharacter;
+//    }
+
     @PutMapping("characters/{id}")
-    public Character update(@PathVariable String id, @RequestBody Character character) {
-        Character existingCharacter = characterRepository.findById(id)
-                .orElse(null);
-        characterRepository.deleteById(id);
-        Character newCharacter = character.withId(id);
-        characterRepository.save(newCharacter);
-        return newCharacter;
+    public Character updateCharacter(@PathVariable String id, @RequestBody UpdateCharacterRequest request) {
+        return characterService.updateCharacter(id, request);
     }
 
 }
