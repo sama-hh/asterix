@@ -1,9 +1,10 @@
-package controller;
+package com.example.asterix.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import repository.CharacterRepository;
+import com.example.asterix.repository.CharacterRepository;
+import com.example.asterix.model.Character;
 
 import java.util.List;
 

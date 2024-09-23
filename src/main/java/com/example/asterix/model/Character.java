@@ -1,4 +1,4 @@
-package model;
+package com.example.asterix.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
