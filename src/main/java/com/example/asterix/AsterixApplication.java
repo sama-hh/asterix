@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AsterixApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AsterixApplication.class, args);
-	}
 
+		System.out.println(System.getenv("MONGODB_URI"));
+
+		SpringApplication.run(AsterixApplication.class, args);
+
+
+	}
 }
