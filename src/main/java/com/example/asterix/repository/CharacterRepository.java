@@ -11,9 +11,8 @@ import java.util.List;
 public interface CharacterRepository extends MongoRepository<Character, String> {
 
     @Query("{name: ?0}")
-    List<Character> findPeopleByTheirName(String firstName);
-
-    // Method name queries
     List<Character> findByName(String name);
+
+    List<Character> findByAgeLessThanEqual(int age);
 
 }

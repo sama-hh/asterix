@@ -1,6 +1,9 @@
 package com.example.asterix.controller;
 
+import com.example.asterix.dto.CreatePersonRequest;
+import com.example.asterix.service.CharacterService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.asterix.repository.CharacterRepository;
 import com.example.asterix.model.Character;
@@ -12,26 +15,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AsterixController {
     private final CharacterRepository characterRepository;
-
-//    @GetMapping("/characters")
-//    public List<Character> findAll() {
-//        List<Character> people = characterRepository.findAll();
-//        return people;
-//    }
+    private final CharacterService characterService;
 
     @GetMapping("/characters")
-    public List<Character> findAll(@RequestParam("name") String name) {
-        if (name == null) {
-            return characterRepository.findAll();
-        }
-        List<Character> peopleByName = characterRepository.findByName(name);
-        return peopleByName;
+    public List<Character> findAll(@RequestParam(required = false) Integer age) {
+        List<Character> people = characterService.getAllCharacters(age);
+        return people;
     }
 
+//    @GetMapping("/characters")
+//    public List<Character> findAll(@RequestParam("name") String name) {
+//        if (name == null) {
+//            return characterRepository.findAll();
+//        }
+//        List<Character> peopleByName = characterRepository.findByName(name);
+//        return peopleByName;
+//    }
+
     @PostMapping("characters")
-    public Character save(@RequestBody Character character) {
-        Character saved = characterRepository.save(character);
-        return saved;
+    public Character save(@RequestBody CreatePersonRequest request) {
+        Character newCharacter = characterService.createCharacter(request.toModel());
+        return newCharacter;
     }
 
     @DeleteMapping("characters/{id}")
