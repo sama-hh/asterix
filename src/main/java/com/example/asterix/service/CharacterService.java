@@ -24,8 +24,11 @@ public class CharacterService {
     }
 
     public List<Character> getAllCharacters(Integer age) {
-        List<Character> filteredCharacters = characterRepository.findByAgeLessThanEqual(age);
-        return filteredCharacters;
+        if (age != null) {
+            List<Character> filteredCharacters = characterRepository.findByAgeLessThanEqual(age);
+            return filteredCharacters;
+        }
+        return characterRepository.findAll();
     }
 
     public Character updateCharacter(String id, UpdateCharacterRequest request) {
