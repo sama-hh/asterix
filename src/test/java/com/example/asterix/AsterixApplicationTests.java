@@ -17,6 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.annotation.Id;
 
 
 import java.util.ArrayList;
@@ -112,5 +113,29 @@ class AsterixApplicationTests {
 
 		// Then
 		verify(characterRepository, times(1)).deleteById(characterId);
+	}
+
+	@Test
+	public void addCharacter() {
+		String generatedId = "1";
+		Character character = Character.builder()
+				.name("Idefix")
+				.age(5)
+				.profession("Dog")
+				.build();
+
+		when(IdService.randomId()).thenReturn(generatedId);
+		when(characterRepository.save(any(Character.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+		// When
+		Character result = characterService.createCharacter(character);
+
+		// Then
+		assertEquals(generatedId, result.id());
+		assertEquals("Idefix", result.name());
+		assertEquals(5, result.age());
+		assertEquals("Dog", result.profession());
+		verify(IdService, times(1)).randomId();
+		verify(characterRepository, times(1)).save(any(Character.class));
 	}
 }
