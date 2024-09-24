@@ -41,7 +41,7 @@ public class AsterixController {
 
     @DeleteMapping("characters/{id}")
     public void delete(@PathVariable String id) {
-        characterRepository.deleteById(id);
+        characterService.deleteCharacter(id);
     }
 
 //    @PutMapping("characters/{id}")

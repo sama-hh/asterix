@@ -43,6 +43,10 @@ public class CharacterService {
         return characterRepository.save(updatedCharacter);
     }
 
+    public void deleteCharacter(String id) {
+        characterRepository.deleteById(id);
+    }
+
 
     private void validateCharacter(Character character) {
         validateName(character.name());
