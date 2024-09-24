@@ -97,5 +97,8 @@ public class IntegrationTests {
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/asterix/characters/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
+        boolean exists = characterRepository.existsById("1");
+        assert !exists;
     }
 }
