@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest
 class AsterixApplicationTests {
 
 	@Mock
@@ -138,4 +137,5 @@ class AsterixApplicationTests {
 		verify(IdService, times(1)).randomId();
 		verify(characterRepository, times(1)).save(any(Character.class));
 	}
+
 }

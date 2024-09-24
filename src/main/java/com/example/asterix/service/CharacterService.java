@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.asterix.model.Character;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

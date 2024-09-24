@@ -4,12 +4,12 @@ import com.example.asterix.dto.CreatePersonRequest;
 import com.example.asterix.dto.UpdateCharacterRequest;
 import com.example.asterix.service.CharacterService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.asterix.repository.CharacterRepository;
 import com.example.asterix.model.Character;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/asterix")
@@ -20,9 +20,9 @@ public class AsterixController {
 
     @GetMapping("/characters")
     public List<Character> findAll(@RequestParam(required = false) Integer age) {
-        List<Character> people = characterService.getAllCharacters(age);
-        return people;
+        return characterService.getAllCharacters(age);
     }
+
 
 //    @GetMapping("/characters")
 //    public List<Character> findAll(@RequestParam("name") String name) {
@@ -38,6 +38,8 @@ public class AsterixController {
         Character newCharacter = characterService.createCharacter(request.toModel());
         return newCharacter;
     }
+
+
 
     @DeleteMapping("characters/{id}")
     public void delete(@PathVariable String id) {
